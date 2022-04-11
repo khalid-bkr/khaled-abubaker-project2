@@ -1,8 +1,5 @@
-import {
-  hardWords,
-  mediumWords,
-  easyWords,
-} from "../components/WordleGame/words";
+import { easyWords, mediumWords, hardWords } from "./words";
+
 import {
   attemptMedium,
   attemptEasy,
@@ -21,17 +18,17 @@ export const handleDifficulty = (difficulty) => {
 };
 
 export const handleWordSelection = (difficulty) => {
-  let wordLevel = mediumWords;
+  let wordLevel;
   if (difficulty === "easy") {
     wordLevel = easyWords;
   } else if (difficulty === "hard") {
     wordLevel = hardWords;
+  } else if (difficulty === "medium") {
+    wordLevel = mediumWords;
   }
 
   const randomIdx = Math.floor(Math.random() * wordLevel.length);
-
   const selectedWord = wordLevel[randomIdx];
-
   return selectedWord;
 };
 

@@ -6,8 +6,6 @@ import { useParams } from "react-router";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const App = () => {
-  const { difficulty } = useParams();
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -18,7 +16,6 @@ const App = () => {
           <Route path={"/Game"} element={<WordGrid />} />
         </Routes>
       </BrowserRouter>
-      {/* <WordGrid difficulty={difficulty} /> */}
     </div>
   );
 };

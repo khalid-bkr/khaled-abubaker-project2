@@ -17,21 +17,21 @@ const Home = () => {
           <h4 className="sub-heading">Play Wordle in various difficulties!</h4>
         </div>
         <div className="d-flex justify-content-center align-items-center cards">
-          <div className="d-flex justify-content-center align-items-center card">
-            <p>
-              <Link to={`/Game/easy`}>Easy</Link>
-            </p>
-          </div>
-          <div className="d-flex justify-content-center align-items-center card">
-            <p>
-              <Link to={`/Game/medium`}>Medium</Link>
-            </p>
-          </div>
-          <div className="d-flex justify-content-center align-items-center card">
-            <p>
-              <Link to={`/Game/hard`}>Hard</Link>
-            </p>
-          </div>
+          <Link to={`/Game/easy`}>
+            <div className="d-flex justify-content-center align-items-center card">
+              <p>Easy</p>
+            </div>
+          </Link>
+          <Link to={`/Game/medium`}>
+            <div className="d-flex justify-content-center align-items-center card">
+              <p>Medium</p>
+            </div>
+          </Link>
+          <Link to={`/Game/hard`}>
+            <div className="d-flex justify-content-center align-items-center card">
+              <p>Hard</p>
+            </div>
+          </Link>
         </div>
       </div>
     </Container>

@@ -14,9 +14,11 @@ import {
   handleWordSelection,
   handleColors,
 } from "../../utils/helper";
+import wordExists from "word-exists";
+
 // import { getWordsSet } from "../../utils/words";
 
-import { Container, Toast, Modal, Button } from "react-bootstrap";
+import { Container, Toast } from "react-bootstrap";
 import WordleModal from "../WordleModal";
 const WordGrid = () => {
   const { difficulty } = useParams();
@@ -36,9 +38,6 @@ const WordGrid = () => {
   const [gameOver, setGameOver] = useState(false);
 
   const modalShow = useSelector((state) => state.modalShow.value);
-  // const [modalShow, setModalShow] = useState(false);
-
-  // const [restart, setRestart] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -92,6 +91,11 @@ const WordGrid = () => {
 
     const guessedWord = grid[attemptNumber.attempt];
 
+    // check if word is a valid english word
+    if (!wordExists(guessedWord.join(""))) {
+      handleAlert(`Word is not Valid, Try Again!`, true);
+      return;
+    }
     const rowColors = handleColors(pickedWord, guessedWord);
 
     const newColors = [...colors];
@@ -104,6 +108,7 @@ const WordGrid = () => {
       })
     );
     // check if word is correct
+
     if (guessedWord.join("") === pickedWord.toUpperCase()) {
       handleAlert(
         `Congratulations! The word is ${pickedWord.toUpperCase()}`,
@@ -121,7 +126,6 @@ const WordGrid = () => {
       );
       setGameOver((prev) => true);
       dispatch(setModalShow(true));
-      // setModalShow((prev) => true);
       console.log(statistics.streak, statistics.maxStreak);
       return;
     }
@@ -140,7 +144,6 @@ const WordGrid = () => {
       );
       setGameOver((prev) => true);
       dispatch(setModalShow(true));
-      // setModalShow((prev) => true);
       return;
     }
   };
@@ -190,11 +193,13 @@ const WordGrid = () => {
     (event) => {
       if (modalShow) return;
       const { key, keyCode } = event;
+      // restart game if user presses enter
       if (gameOver && !modalShow && keyCode === 13) {
         handleRestart();
-        return console.log("done");
       }
+      // keep page as it is if user doesn't press enter
       if (gameOver) return;
+      // take user input
       if (keyCode === 13) {
         onEnter();
       } else if (keyCode === 8) {
