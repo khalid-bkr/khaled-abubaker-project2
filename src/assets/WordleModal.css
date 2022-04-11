@@ -1,0 +1,38 @@
+.modal-style {
+  background-color: #121212;
+  color: white;
+}
+
+.close {
+  color: white;
+}
+
+.close-btn {
+  color: white;
+  background-color: #3a3a3b;
+  border-color: #3a3a3b;
+}
+
+.close-btn:hover {
+  background-color: #323232;
+  border-color: #323232;
+}
+
+.play-btn {
+  background-color: #538c4e;
+  border-color: #538c4e;
+}
+
+.play-btn:hover {
+  background-color: #538c00;
+  border-color: #538c00;
+}
+
+.statistic-box {
+  background-color: #b59f3b;
+  color: white;
+  border: 1px solid #b59f3b;
+  border-radius: 0.4em;
+  margin: 0.5em 1em;
+  padding: 0.5em;
+}

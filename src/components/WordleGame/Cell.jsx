@@ -12,7 +12,7 @@ const Cell = (props) => {
       : "";
 
   return (
-    <div className="cell" id={color}>
+    <div className="cell-wordle" id={color}>
       {props.char}
     </div>
   );

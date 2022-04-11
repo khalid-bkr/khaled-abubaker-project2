@@ -1,15 +1,23 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Row from "./Row";
-import { hardWords, mediumWords, easyWords } from "./words";
-import { attemptMedium, attemptEasy, attemptHard } from "./attempt";
 import { useSelector, useDispatch } from "react-redux";
 import { attempt } from "../../reducers/rowReducer";
 import { AttemptCounter } from "../../reducers/attemptReducer";
 import { fillcolors } from "../../reducers/colorReducer";
 import { wordCorrect } from "../../reducers/correctWordReducer";
+import { restartGame } from "../../reducers/restartReducer";
+import { gameStatistics } from "../../reducers/statisticsReducer";
+import { setModalShow } from "../../reducers/modalShowReducer";
 import { useParams } from "react-router";
-// import { useParams } from "react-router";
-import { Container } from "react-bootstrap";
+import {
+  handleDifficulty,
+  handleWordSelection,
+  handleColors,
+} from "../../utils/helper";
+// import { getWordsSet } from "../../utils/words";
+
+import { Container, Toast, Modal, Button } from "react-bootstrap";
+import WordleModal from "../WordleModal";
 const WordGrid = () => {
   const { difficulty } = useParams();
 
@@ -17,76 +25,70 @@ const WordGrid = () => {
   const grid = useSelector((state) => state.grid.value);
   const attemptNumber = useSelector((state) => state.attempt.value);
   const colors = useSelector((state) => state.colors.value);
+  const restart = useSelector((state) => state.restartGame.value);
+  const statistics = useSelector((state) => state.gameStatistics.value);
+
+  const [alert, setAlert] = useState({
+    message: "",
+    visiable: "",
+  });
+
+  const [gameOver, setGameOver] = useState(false);
+
+  const modalShow = useSelector((state) => state.modalShow.value);
+  // const [modalShow, setModalShow] = useState(false);
+
+  // const [restart, setRestart] = useState(false);
 
   const dispatch = useDispatch();
 
-  const handleDifficulty = (difficulty) => {
-    let gameDiff = attemptMedium;
-
-    if (difficulty === "easy") {
-      gameDiff = attemptEasy;
-    } else if (difficulty === "hard") {
-      gameDiff = attemptHard;
+  useEffect(() => {
+    if (difficulty) {
+      dispatch(attempt([...handleDifficulty(difficulty)]));
+      dispatch(wordCorrect(handleWordSelection(difficulty)));
     }
-    dispatch(attempt([...gameDiff]));
+  }, [dispatch, difficulty]);
+
+  const handleAlert = (message, timeout) => {
+    setAlert((prev) => ({
+      ...prev,
+      message,
+      visiable: true,
+    }));
+    if (timeout) {
+      setTimeout(
+        () => setAlert((prev) => ({ ...prev, message: "", visiable: false })),
+        2200
+      );
+    }
   };
 
-  const handleWordSelection = (difficulty) => {
-    let wordLevel = mediumWords;
-    if (difficulty === "easy") {
-      wordLevel = easyWords;
-    } else if (difficulty === "hard") {
-      wordLevel = hardWords;
-    }
-    const randomIdx = Math.floor(Math.random() * wordLevel.length);
-
-    const selectedWord = wordLevel[randomIdx];
-    dispatch(wordCorrect(selectedWord));
+  const handleRestart = () => {
+    dispatch(restartGame(true));
   };
 
   useEffect(() => {
-    if (difficulty) {
-      handleDifficulty(difficulty);
-      handleWordSelection(difficulty);
-    }
-  }, [difficulty]);
-
-  const handleColors = (correctWord, guessedWord) => {
-    const COLOR_CORRECT_SPOT = "green";
-    const COLOR_WRONG_SPOT = "yellow";
-    const COLOR_NOT_ANY_SPOT = "grey";
-    correctWord = correctWord.toUpperCase();
-    let colors = new Array(guessedWord.length);
-    let unmatched = {}; // unmatched word letters
-    for (let i = 0; i < correctWord.length; i++) {
-      let letter = correctWord[i];
-      if (letter === guessedWord[i]) {
-        colors[i] = COLOR_CORRECT_SPOT;
-      } else {
-        unmatched[letter] = (unmatched[letter] || 0) + 1;
-      }
-    }
-
-    for (let i = 0; i < guessedWord.length; i++) {
-      let letter = guessedWord[i];
-      if (letter !== correctWord[i]) {
-        if (unmatched[letter]) {
-          colors[i] = COLOR_WRONG_SPOT;
-          unmatched[letter]--;
-        } else {
-          colors[i] = COLOR_NOT_ANY_SPOT;
-        }
-      }
-    }
-    return colors;
-  };
+    dispatch(attempt([...handleDifficulty(difficulty)]));
+    dispatch(wordCorrect(handleWordSelection(difficulty)));
+    dispatch(fillcolors([]));
+    dispatch(
+      AttemptCounter({
+        attempt: 0,
+        charPosition: 0,
+      })
+    );
+    setAlert({ messasge: "", visiable: "" });
+    setGameOver(false);
+    dispatch(restartGame(false));
+  }, [dispatch, restart, difficulty]);
 
   const onEnter = () => {
     // prompt user to enter a valid length word
-    // if (attemptNumber.attempt < grid[0].length) {
 
-    // }
-    if (attemptNumber.charPosition != grid[0].length) return;
+    if (attemptNumber.charPosition < grid[0].length) {
+      handleAlert("Not enough letters", true);
+      return;
+    }
 
     const guessedWord = grid[attemptNumber.attempt];
 
@@ -102,14 +104,44 @@ const WordGrid = () => {
       })
     );
     // check if word is correct
-    // if (guessedWord.join("") === correctWord) {
+    if (guessedWord.join("") === pickedWord.toUpperCase()) {
+      handleAlert(
+        `Congratulations! The word is ${pickedWord.toUpperCase()}`,
+        false
+      );
 
-    // }
+      dispatch(
+        gameStatistics({
+          ...statistics,
+          title: "Congratulations!! You've guessed correctly",
+          played: statistics.played + 1,
+          streak: statistics.streak + 1,
+          maxStreak: Math.max(statistics.streak + 1, statistics.maxStreak),
+        })
+      );
+      setGameOver((prev) => true);
+      dispatch(setModalShow(true));
+      // setModalShow((prev) => true);
+      console.log(statistics.streak, statistics.maxStreak);
+      return;
+    }
 
     // check if attempt number is the last one
 
     if (attemptNumber.attempt === grid.length - 1) {
-      console.log("you lost");
+      handleAlert(pickedWord.toUpperCase(), false);
+      dispatch(
+        gameStatistics({
+          ...statistics,
+          title: `The word is ${pickedWord.toUpperCase()}`,
+          played: statistics.played + 1,
+          streak: 0,
+        })
+      );
+      setGameOver((prev) => true);
+      dispatch(setModalShow(true));
+      // setModalShow((prev) => true);
+      return;
     }
   };
 
@@ -156,7 +188,13 @@ const WordGrid = () => {
 
   const handleUserKeyPress = useCallback(
     (event) => {
+      if (modalShow) return;
       const { key, keyCode } = event;
+      if (gameOver && !modalShow && keyCode === 13) {
+        handleRestart();
+        return console.log("done");
+      }
+      if (gameOver) return;
       if (keyCode === 13) {
         onEnter();
       } else if (keyCode === 8) {
@@ -165,7 +203,17 @@ const WordGrid = () => {
         onAddChar(keyCode, key);
       }
     },
-    [grid, attemptNumber, dispatch]
+    [
+      grid,
+      attemptNumber,
+      gameOver,
+      modalShow,
+      onAddChar,
+      onDelete,
+      onEnter,
+      handleRestart,
+      dispatch,
+    ]
   );
 
   useEffect(() => {
@@ -179,7 +227,23 @@ const WordGrid = () => {
     return grid.map((row, index) => <Row data={row} currentAttempt={index} />);
   };
 
-  return <div className="grid">{createRows()}</div>;
+  return (
+    <Container className="d-flex flex-column justify-content-center align-items-center">
+      {alert.visiable && (
+        <Toast className="toast-wrapper">
+          <Toast.Body className="toast-message">{alert.message}</Toast.Body>
+        </Toast>
+      )}
+      <div className="grid-wordle">{createRows()}</div>
+      <WordleModal
+        show={modalShow}
+        modalheading={"Statistics"}
+        modaltitle={statistics}
+        modalinfo={statistics}
+        onHide={() => dispatch(setModalShow(false))}
+      ></WordleModal>
+    </Container>
+  );
 };
 
 export default WordGrid;

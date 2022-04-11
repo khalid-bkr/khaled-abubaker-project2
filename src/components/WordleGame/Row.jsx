@@ -15,7 +15,7 @@ const Row = (props) => {
     }
     return cells;
   };
-  return <div className="row">{createCells()}</div>;
+  return <div className="row-wordle">{createCells()}</div>;
 };
 
 export default Row;

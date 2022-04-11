@@ -1,15 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  attemptEasy,
-  attemptHard,
-  attemptMedium,
-} from "../components/WordleGame/attempt";
 
-// const currentColors = new Array(guessedWord.length);
 export const colorsSlice = createSlice({
   name: "colors",
   initialState: {
-    value: [attemptHard],
+    value: [],
   },
   reducers: {
     fillcolors: (state, action) => {
@@ -19,5 +13,7 @@ export const colorsSlice = createSlice({
 });
 
 export const { fillcolors } = colorsSlice.actions;
+
+export const selectColors = (state) => state.colors.value;
 
 export default colorsSlice.reducer;

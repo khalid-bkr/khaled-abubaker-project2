@@ -1,4 +1,5 @@
 @import url(Cell.css);
+@import url(WordleModal.css);
 
 .App {
   text-align: center;
@@ -9,25 +10,21 @@
   color: white;
 }
 
-body {
-  padding: 0%;
-  margin: 0;
-}
-.grid {
+.grid-wordle {
   width: 450px;
   height: 550px;
-  border: 1px solid black;
+  margin-top: 8em;
   display: flex;
   flex-direction: column;
 }
-.row {
+.row-wordle {
   flex: 33%;
   display: flex;
   flex-direction: row;
   margin: 5px;
 }
 
-.cell {
+.cell-wordle {
   flex: 33%;
   height: 100%;
   border: 1px solid grey;
@@ -38,4 +35,14 @@ body {
   font-weight: bolder;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.toast-wrapper {
+  /* margin: 3em auto; */
+  position: absolute;
+  top: 10%;
+}
+.toast-message {
+  color: black;
+  background-color: white;
 }

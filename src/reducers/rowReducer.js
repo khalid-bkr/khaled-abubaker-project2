@@ -1,11 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  attemptEasy,
-  attemptHard,
-  attemptMedium,
-} from "../components/WordleGame/attempt";
 
-// const currentAttempt = [...attemptHard];
 const currentAttempt = [];
 export const rowSlice = createSlice({
   name: "grid",
@@ -20,5 +14,7 @@ export const rowSlice = createSlice({
 });
 
 export const { attempt } = rowSlice.actions;
+
+export const selectGrid = (state) => state.grid.value;
 
 export default rowSlice.reducer;

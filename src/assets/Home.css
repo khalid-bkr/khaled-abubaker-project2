@@ -23,10 +23,96 @@ body {
   color: #eeeeee;
 } */
 
+a {
+  text-decoration: none;
+  color: white;
+}
+
 a:hover {
   color: #d8d8d8;
 }
 
 li {
   list-style: none;
+}
+
+.page-heading {
+  padding-top: 6em;
+  /* border: 1pxdx ; */
+}
+
+.heading-title {
+  font-size: 68px;
+  margin: 0;
+}
+
+.sub-heading-style {
+  color: #538c4e;
+}
+
+.sub-heading {
+  padding-top: 2em;
+}
+
+.typewriter h1 {
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: 0.15em solid transparent; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0.05em; /* Adjust as needed */
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end 2.5;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  10% {
+    border-color: #538c4e;
+  }
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+  margin: 2em 2em;
+}
+
+.card {
+  background-color: #b59f3b;
+  height: 10em;
+  width: 15em;
+  /* font-size: 20px; */
+  /* display: flex; */
+  /* text-align: center; */
+}
+
+.card p {
+  font-family: "Open Sans", sans-serif;
+  font-size: 2em;
+}
+
+@media (max-width: 576px) {
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 2em 2em;
+  }
+
+  .card {
+    width: 100%;
+  }
 }

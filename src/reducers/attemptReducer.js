@@ -18,4 +18,6 @@ export const attemptSlice = createSlice({
 
 export const { AttemptCounter } = attemptSlice.actions;
 
+export const selectAttempt = (state) => state.attempt.value;
+
 export default attemptSlice.reducer;
