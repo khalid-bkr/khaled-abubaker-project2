@@ -13,7 +13,6 @@ const App = () => {
         <Routes>
           <Route path={"/"} element={<Home />} />
           <Route path={"/Game/:difficulty"} element={<WordGrid />} />
-          <Route path={"/Game"} element={<WordGrid />} />
           <Route path={"/Rules"} element={<Rules />} />
         </Routes>
       </BrowserRouter>
