@@ -2,7 +2,7 @@ import React from "react";
 import WordleModal from "./WordleModal";
 import { useSelector, useDispatch } from "react-redux";
 import { setModalShow } from "../reducers/modalShowReducer";
-import { Container, Navbar, NavDropdown, Nav } from "react-bootstrap";
+import { Container, Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
@@ -26,19 +26,7 @@ const NavBar = () => {
           </Link>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-              {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown> */}
-            </Nav>
+            <Nav className="me-auto"></Nav>
             <Nav>
               <Nav.Link onClick={() => dispatch(setModalShow(true))}>
                 Statistics
