@@ -1,48 +1,61 @@
 @import url(Cell.css);
 @import url(WordleModal.css);
+@import url(Rules.css);
 
 .App {
   text-align: center;
   background-color: #121212;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
-  /* display: flex; */
   color: white;
 }
 
 .grid-wordle {
-  width: 450px;
-  height: 550px;
-  margin-top: 8em;
   display: flex;
   flex-direction: column;
+
+  margin-top: 8em;
+  width: 100%;
+  align-items: center;
 }
 .row-wordle {
-  flex: 33%;
   display: flex;
   flex-direction: row;
-  margin: 5px;
+  margin: 0.5em 2em;
 }
 
 .cell-wordle {
-  flex: 33%;
-  height: 100%;
+  width: 4em;
+  height: 4em;
   border: 1px solid grey;
-  margin: 5px;
+  margin: 0 0.3em;
   display: grid;
   place-items: center;
-  font-size: 30px;
   font-weight: bolder;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.cell-wordle p {
+  font-size: 30px;
+}
+
 .toast-wrapper {
-  /* margin: 3em auto; */
   position: absolute;
   top: 10%;
 }
 .toast-message {
   color: black;
   background-color: white;
+}
+
+@media (max-width: 576px) {
+  .cell-wordle {
+    height: 3em;
+    width: 3em;
+  }
+
+  .cell-wordle p {
+    font-size: 25px;
+  }
 }

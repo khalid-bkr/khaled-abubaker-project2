@@ -4,6 +4,7 @@ import Home from "./Home";
 import NavBar from "./NavBar";
 import { useParams } from "react-router";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Rules from "./Rules";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
           <Route path={"/"} element={<Home />} />
           <Route path={"/Game/:difficulty"} element={<WordGrid />} />
           <Route path={"/Game"} element={<WordGrid />} />
+          <Route path={"/Rules"} element={<Rules />} />
         </Routes>
       </BrowserRouter>
     </div>

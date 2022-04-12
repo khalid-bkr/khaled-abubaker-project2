@@ -33,6 +33,12 @@ const Home = () => {
             </div>
           </Link>
         </div>
+        <div className="game-rules">
+          <h4>Check out the Game's rule book to learn how to play Wordle!</h4>
+          <Link to={"/Rules"} className="btn rules-btn">
+            Rule Book
+          </Link>
+        </div>
       </div>
     </Container>
   );

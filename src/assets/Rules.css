@@ -1,0 +1,71 @@
+.rule {
+  font-family: "Open Sans", sans-serif;
+  margin: 1em auto;
+  /* padding: 20px; */
+}
+
+.rules h4 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 2em;
+  font-weight: 600;
+}
+
+.rules-list li {
+  font-family: "Open Sans", sans-serif;
+  display: flex;
+  justify-content: start;
+  margin: 1em auto;
+  font-weight: bold;
+}
+
+.examples h4 {
+  margin: 1em 0;
+}
+
+.example-img {
+  height: 100%;
+  width: 22em;
+  margin-bottom: 1em;
+}
+
+.examples-list li {
+  margin: 1em 0;
+}
+
+.examples-list li p {
+  font-size: 1em;
+}
+
+.picked-letter {
+  font-weight: bold;
+  color: white;
+  border: 1px solid white;
+  background-color: #3a3a3b;
+  padding: 0.2em 0.4em;
+}
+
+.green {
+  background-color: #538c4e;
+}
+
+.yellow {
+  background-color: #b59f3b;
+}
+
+@media (max-width: 576px) {
+  .rules h4 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.5em;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+  }
+
+  .rules-list li {
+    font-family: "Open Sans", sans-serif;
+    display: flex;
+    justify-content: center;
+    margin: 1em auto;
+    font-weight: bold;
+  }
+}

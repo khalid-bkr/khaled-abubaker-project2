@@ -43,7 +43,7 @@ const NavBar = () => {
               <Nav.Link onClick={() => dispatch(setModalShow(true))}>
                 Statistics
               </Nav.Link>
-              <Nav.Link eventKey={2} href="#memes">
+              <Nav.Link as={Link} to={"/Rules"}>
                 Rules
               </Nav.Link>
             </Nav>

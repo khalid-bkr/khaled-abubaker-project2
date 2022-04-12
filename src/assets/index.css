@@ -2,9 +2,13 @@
 @import url(Home.css);
 @import url(Navbar.css);
 
-body {
-  padding: 0%;
+* {
+  padding: 0;
   margin: 0;
+  overflow-x: hidden;
+}
+
+body {
 }
 
 p {

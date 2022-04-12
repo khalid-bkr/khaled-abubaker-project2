@@ -60,7 +60,7 @@ li {
   white-space: nowrap; /* Keeps the content on a single line */
   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
   letter-spacing: 0.05em; /* Adjust as needed */
-  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end 2.5;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end 1.5;
 }
 
 /* The typing effect */
@@ -103,6 +103,14 @@ li {
 .card p {
   font-family: "Open Sans", sans-serif;
   font-size: 2em;
+}
+
+.game-rules {
+  margin: 4em auto;
+}
+.rules-btn {
+  background-color: #538c4e;
+  color: white;
 }
 
 @media (max-width: 576px) {
