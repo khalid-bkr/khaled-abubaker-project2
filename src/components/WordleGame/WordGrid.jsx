@@ -235,8 +235,10 @@ const WordGrid = () => {
   return (
     <Container className="d-flex flex-column justify-content-center align-items-center">
       {alert.visiable && (
-        <Toast className="toast-wrapper">
-          <Toast.Body className="toast-message">{alert.message}</Toast.Body>
+        <Toast className="toast-wrapper toast-style">
+          <Toast.Body className="toast-message">
+            <p>{alert.message}</p>
+          </Toast.Body>
         </Toast>
       )}
       <div className="grid-wordle">{createRows()}</div>

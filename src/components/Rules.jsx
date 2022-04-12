@@ -6,11 +6,16 @@ const Rules = () => {
   return (
     <Container>
       <div className="page-heading">
-        <h2 className="heading-title">WORDLE EXTRA</h2>
-        <hr />
+        <h2 className="rule-page-title">
+          WORDLE{" "}
+          <span className="sub-heading-style">
+            <strong>EXTRA</strong>
+          </span>
+        </h2>
       </div>
-      <div className="rules">
-        <h4 className="d-flex justify-content-start">Game Rules:</h4>
+      <hr />
+      <div className="d-flex flex-column justify-content-start align-items-start">
+        <h4 className="rule-title">Game Rules:</h4>
         <ul className="rules-list">
           <li className="">
             Guess the hidden word in a number of tries depending on the
@@ -25,34 +30,34 @@ const Rules = () => {
             examples below.
           </li>
         </ul>
-        <hr />
-        <div className="examples d-flex flex-column align-items-start">
-          <h4 className="">Examples</h4>
-          <ul className="d-flex flex-column examples-list">
-            <li>
-              <Image src="/images/ex1.png" className="example-img" />
-              <p>
-                The letter <span className="picked-letter green">A</span> is in
-                the word and in the correct spot.
-              </p>
-            </li>
-            <li>
-              <Image src="/images/ex2.png" className="example-img" />
-              <p>
-                The letter <span className="picked-letter yellow">H</span> is in
-                the word but in the wrong spot.
-              </p>
-            </li>
-            <li>
-              <Image src="/images/ex3.png" className="example-img" />
-              <p>
-                The letters <span className="picked-letter">R</span> and{" "}
-                <span className="picked-letter">I</span> are not in the word in
-                any spot at all.
-              </p>
-            </li>
-          </ul>
-        </div>
+      </div>
+      <hr />
+      <div className="examples d-flex flex-column align-items-start">
+        <h4 className="rule-title">Examples</h4>
+        <ul className="d-flex flex-column examples-list">
+          <li>
+            <Image src="/images/ex1.png" className="example-img" />
+            <p>
+              The letter <span className="picked-letter green">A</span> is in
+              the word and in the correct spot.
+            </p>
+          </li>
+          <li>
+            <Image src="/images/ex2.png" className="example-img" />
+            <p>
+              The letter <span className="picked-letter yellow">H</span> is in
+              the word but in the wrong spot.
+            </p>
+          </li>
+          <li>
+            <Image src="/images/ex3.png" className="example-img" />
+            <p>
+              The letters <span className="picked-letter">R</span> and{" "}
+              <span className="picked-letter">I</span> are not in the word in
+              any spot at all.
+            </p>
+          </li>
+        </ul>
       </div>
     </Container>
   );

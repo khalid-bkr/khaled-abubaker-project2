@@ -38,7 +38,7 @@ export const handleColors = (correctWord, guessedWord) => {
   const COLOR_NOT_ANY_SPOT = "grey";
   correctWord = correctWord.toUpperCase();
   let colors = new Array(guessedWord.length);
-  let unmatched = {}; // unmatched word letters
+  let unmatched = {};
   for (let i = 0; i < correctWord.length; i++) {
     let letter = correctWord[i];
     if (letter === guessedWord[i]) {

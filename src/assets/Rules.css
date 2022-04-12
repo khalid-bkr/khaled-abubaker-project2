@@ -4,6 +4,18 @@
   /* padding: 20px; */
 }
 
+.rule-page-title {
+  font-size: 68px;
+  margin: 0;
+  text-align: center;
+}
+
+.rule-title {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
 .rules h4 {
   font-family: "Open Sans", sans-serif;
   font-size: 2em;
@@ -39,7 +51,7 @@
 .picked-letter {
   font-weight: bold;
   color: white;
-  border: 1px solid white;
+  /* border: 1px solid white; */
   background-color: #3a3a3b;
   padding: 0.2em 0.4em;
 }
@@ -52,7 +64,13 @@
   background-color: #b59f3b;
 }
 
+@media (max-width: 992px) {
+}
+
 @media (max-width: 576px) {
+  .example-img {
+    width: 15em;
+  }
   .rules h4 {
     font-family: "Open Sans", sans-serif;
     font-size: 1.5em;
